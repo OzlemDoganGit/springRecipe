@@ -26,9 +26,9 @@ public class IngredientServicesImp implements IngredientServices {
 		return ingredientRepo.saveAll(entities);
 	}
 	@Override
-	public Optional<Ingredient> findById(Long id) {
+	public Ingredient findById(Long id) {
 		// TODO Auto-generated method stub
-		return ingredientRepo.findById(id);
+		return ingredientRepo.findById(id).get();
 	}
 	@Override
 	public boolean existsById(Long id) {

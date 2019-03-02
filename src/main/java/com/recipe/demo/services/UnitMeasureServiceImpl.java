@@ -36,9 +36,9 @@ public class UnitMeasureServiceImpl implements UnitMeasureServices {
 	}
 
 	@Override
-	public Optional<UnitMeasure> findById(Long id) {
+	public UnitMeasure findById(Long id) {
 		// TODO Auto-generated method stub
-		return unitMeasureRepo.findById(id);
+		return unitMeasureRepo.findById(id).get();
 	}
 
 	@Override

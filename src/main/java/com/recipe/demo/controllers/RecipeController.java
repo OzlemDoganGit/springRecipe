@@ -3,6 +3,7 @@ package com.recipe.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.recipe.demo.services.RecipeServices;
@@ -28,5 +29,13 @@ public class RecipeController {
 	{
 		theModel.addAttribute("recipeList", recipeService.getRecipes());
 		return "recipe/list";
+	}
+	
+	
+	@RequestMapping("/recipe/show/{id}")
+	public String getRecipe(@PathVariable String id, Model theModel)
+	{
+		theModel.addAttribute("recipe", recipeService.findById(new Long(id)));
+		return "recipe/show";
 	}
 }

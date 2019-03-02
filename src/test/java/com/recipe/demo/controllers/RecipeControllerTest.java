@@ -1,10 +1,14 @@
 package com.recipe.demo.controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,10 +24,6 @@ import org.springframework.ui.Model;
 
 import com.recipe.demo.model.Recipe;
 import com.recipe.demo.services.RecipeServices;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class RecipeControllerTest {
 	
@@ -69,6 +69,19 @@ public class RecipeControllerTest {
 		verify(theModel, times(1)).addAttribute(eq("recipeList"), argumentCaptor.capture());
 		Set <Recipe> setInController = argumentCaptor.getValue();
 		assertEquals(2, setInController.size());
+	}
+	
+	@Test
+	public void testGetRecipe() throws Exception {
+		Recipe recipe = new Recipe();
+		MockMvc mockMVC = MockMvcBuilders.standaloneSetup(recipeController).build();
+		recipe.setId(1L);
+		when(recipeService.findById(anyLong())).thenReturn(recipe);
+		
+		mockMVC.perform(get("/recipe/show/1"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("recipe/show"));
+	
 	}
 
 }

@@ -37,9 +37,15 @@ public class RecipeServicesImp implements RecipeServices {
 	}
 
 	@Override
-	public Optional<Recipe> findById(Long id) {
-		recipeLogService.log(Level.INFO, "Inside Recipe Service findById method..");
-		return recipeRepository.findById(id);
+	public Recipe findById(Long id) {
+		recipeLogService.log(Level.INFO, "Inside Recipe Service findById method.."); 
+		Optional <Recipe> recipeOptional = 	recipeRepository.findById(id);
+		if (!recipeOptional.isPresent())
+		{
+			throw new RuntimeException("Recipe Not Found");
+		}
+		
+		return recipeOptional.get();
 	}
 
 	@Override
@@ -68,8 +74,7 @@ public class RecipeServicesImp implements RecipeServices {
 
 	@Override
 	public void deleteById(Long id) {
-		recipeRepository.deleteById(id);
-		
+		recipeRepository.deleteById(id);		
 	}
 
 	@Override

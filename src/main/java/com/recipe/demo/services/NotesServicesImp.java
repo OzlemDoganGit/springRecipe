@@ -41,9 +41,9 @@ public class NotesServicesImp implements NotesServices {
 	}
 
 	@Override
-	public Optional<Notes> findById(Long id) {
+	public Notes findById(Long id) {
 		// TODO Auto-generated method stub
-		return notesRepository.findById(id);
+		return notesRepository.findById(id).get();
 	}
 
 	@Override

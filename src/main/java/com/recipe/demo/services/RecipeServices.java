@@ -6,5 +6,6 @@ import com.recipe.demo.model.Recipe;
 public interface RecipeServices extends CrudService<Recipe, Long>{
 	
 	Set <Recipe> getRecipes();
+	Recipe findById(Long l);
 
 }

@@ -31,9 +31,9 @@ public class CategoryServicesImp implements CategoryServices{
 	}
 
 	@Override
-	public Optional<Category> findById(Long id) {
+	public Category findById(Long id) {
 		// TODO Auto-generated method stub
-		return categoryRepository.findById(id);
+		return categoryRepository.findById(id).get();
 	}
 
 	@Override
